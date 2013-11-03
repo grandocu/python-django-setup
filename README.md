@@ -28,13 +28,13 @@ Create a virutal environment
 
     mkvirtualenv env
 
-For cross platform development I will make a 'envwindows' and so on.
+For cross platform development I will make a 'envw' for windows and so on.
 
 Initialize your git project 
 
     git init .
     git add .
-    git commite -m"Initial commit"
+    git commit -m"Initial commit"
 
 Now you can install django, django-extensions, south for migrations, and fabric for deployment
 
@@ -42,6 +42,8 @@ Now you can install django, django-extensions, south for migrations, and fabric 
     pip install django-extensions
     pip install south
     pip install fabric
+
+Fabric might be a little tricky for windows.  There are quite a few user forums mentioning compiler issues.  My experience is if you have Visual Studio C++ 2008 install and you run vcvars64.bat before running pip install you will be okay.
 
 This is where we start our project and app
 
@@ -54,7 +56,7 @@ For now I'll just setup an sqlite3 database
 
     import os
     #Set base directory
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
     #.... code here .....
 
@@ -101,7 +103,8 @@ remote repository.  I then migrate, test, and run the server.  Make sure to set 
 def deploy_branch():
     with lcd(os.path.dirname(__file__)):
         local('git checkout --orphan production')
-        local('git rm -rf .')
+        #Remove non-fabfile and non-git directories
+        local('git rm -rf ./myproject')
         local('git pull git@github.com:grandocu/python-django-setup.git')
         local('python ./myproject/manage.py migrate myapp')
         local('python ./myproject/manage.py test myapp')
