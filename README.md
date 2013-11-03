@@ -4,7 +4,8 @@ python-django-setup
 Set up for django projects with virtualenvwrapper and fabric
 
 
-This assumes you have installed python2.7, pip, and easy_install.  Most of this is taken from this tutorial (http://www.jeffknupp.com/blog/2012/02/09/starting-a-django-project-the-right-way/),  I've made some small changes for my setup.
+This assumes you have installed python2.7, pip, and easy_install.  I'm a beginner so take it easy on me.  Most of this is taken from a blog I
+found (http://www.jeffknupp.com/blog/2012/02/09/starting-a-django-project-the-right-way/),  I've made some small changes for my setup.
 
 You will need to get virtualenvwrapper
 
@@ -89,8 +90,12 @@ def prepare_deployment(branch_name):
     local('git checkout master && git merge ' + branch_name)
 ````
 
+you execute this with
+
+    fab prepare_deployment:<branch_name>
+
 The next action I like to do is a deploy_production where I create a new orphaned branch, remove all the files, and pull from the
-remote repository.  I then migrate, test, and run the server
+remote repository.  I then migrate, test, and run the server.  Make sure to set up your ssh key access to your github repository.
 
 ````
 def deploy_branch():
@@ -102,3 +107,9 @@ def deploy_branch():
         local('python ./myproject/manage.py test myapp')
         local('python ./myproject/manage.py runserver')
 ````
+
+Now when you run:
+
+    fab deploy_branch
+
+You will be on a 'production' branch and the sever should be started.
