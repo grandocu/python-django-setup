@@ -28,13 +28,13 @@ Create a virutal environment
 
     mkvirtualenv env
 
+For cross platform development I will make a 'envwindows' and so on.
+
 Initialize your git project 
 
     git init .
     git add .
     git commite -m"Initial commit"
-
-For cross platform development I will make a 'envwindows' and so on.
 
 Now you can install django, django-extensions, south for migrations, and fabric for deployment
 
@@ -67,7 +67,7 @@ Add 'myapp' and 'django_extensions' as an INSTALLED_APP in your settings.py, syn
 
     python manage.py syncdb
     cd myappc
-    python manage.py schemamigration myapp --init
+    python manage.py schemamigration myapp --initial
 
 When changes are made, run:
     python manage.py schemamigration myapp --auto
