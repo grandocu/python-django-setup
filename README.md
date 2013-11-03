@@ -85,7 +85,7 @@ import os
 
 
 def prepare_deployment(branch_name):
-    local('python ./grandoenergymodel/manage.py test myapp')
+    local('python ./myproject/manage.py test myapp')
     local('git checkout master && git merge ' + branch_name)
 ````
 
@@ -98,7 +98,7 @@ def deploy_branch():
         local('git checkout --orphan production')
         local('git rm -rf .')
         local('git pull git@github.com:grandocu/python-django-setup.git')
-        local('python ./grandoenergymodel/manage.py migrate doe22')
-        local('python ./grandoenergymodel/manage.py test doe22')
-        local('python ./grandoenergymodel/manage.py runserver')
+        local('python ./myproject/manage.py migrate myapp')
+        local('python ./myproject/manage.py test myapp')
+        local('python ./myproject/manage.py runserver')
 ````
