@@ -36,12 +36,14 @@ Initialize your git project
     git add .
     git commit -m"Initial commit"
 
-Now you can install django, django-extensions, south for migrations, and fabric for deployment
+Now you can install django, django-extensions, south for migrations, and fabric for deployment.  Also install nose and django-nose to expand testing capabilities
 
     pip install Django
     pip install django-extensions
     pip install south
     pip install fabric
+    pip install nose
+    pip install django-nose
 
 Fabric might be a little tricky for windows.  There are quite a few user forums mentioning compiler issues.  My experience is if you have Visual Studio C++ 2008 install and you run vcvars64.bat before running pip install you will be okay.
 
@@ -57,6 +59,8 @@ For now I'll just setup an sqlite3 database
     import os
     #Set base directory
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+    #Set test_runner to nose
+    TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
     #.... code here .....
 
@@ -65,7 +69,7 @@ For now I'll just setup an sqlite3 database
     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
 
-Add 'myapp' and 'django_extensions' as an INSTALLED_APP in your settings.py, synce your db and migrate
+Add 'myapp', 'django_nose' and 'django_extensions' as an INSTALLED_APP in your settings.py, synce your db and migrate
 
     python manage.py syncdb
     cd myappc

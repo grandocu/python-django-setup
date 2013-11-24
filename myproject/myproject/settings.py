@@ -3,6 +3,9 @@ import os
 #Set base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
+#Set test_runner to nose
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
 # Django settings for myproject project.
 
 DEBUG = True
@@ -135,6 +138,8 @@ INSTALLED_APPS = (
     'django_extensions',
     # South migration
     'south',
+    #nose for testing
+    'django_nose'
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
